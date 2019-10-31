@@ -1,13 +1,17 @@
 from flask import Flask
 from flask_restplus import Resource, Api
-from jdbc import getMycursor
-import jdbc
 import mysql.connector
 
 app = Flask(__name__)
 api = Api(app)
 
-mycursor = getMycursor()
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    passwd="root",
+    database="projet-cine"
+)
+mycursor = mydb.cursor()
 
 
 @api.route('/series')
@@ -29,5 +33,19 @@ class Series(Resource):
         return series_json
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@api.route('/serie/<id>')
+class Serie(Resource):
+    SELECT_ONE_SERIE = "SELECT * FROM serie WHERE ID = ?"
+
+    def get(self, id):
+        self.SELECT_ONE_SERIE = self.SELECT_ONE_SERIE.replace('?', format(id))
+        mycursor.execute(self.SELECT_ONE_SERIE)
+        result = mycursor.fetchall()
+        series_json = {}
+        if len(result) != 0:
+            series_json = {
+                "id": str(result[0][0]),
+                "nom": str(result[0][1].decode()),
+                "description": str(result[0][2].decode())
+            }
+        return series_json
