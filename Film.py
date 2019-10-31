@@ -1,26 +1,33 @@
-import mysql.connector
-import json
 from flask import Flask
 from flask_restplus import Resource, Api
+from jdbc import getMycursor
+import jdbc
+import mysql.connector
 
 app = Flask(__name__)
 api = Api(app)
 
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="pwd",
-    database="projet-cine"
-)
+SELECT_ALL_FILMS = "SELECT * FROM film"
 
-mycursor = mydb.cursor()
+mycursor = getMycursor()
 
-mycursor.execute("SELECT * FROM film")
 
-myresult = mycursor.fetchall()
+@api.route('/films')
+class Films(Resource):
+    def get(self):
+        mycursor.execute(SELECT_ALL_FILMS)
+        les_films = mycursor.fetchall()
+        films_json = {"films": []}
+        for series in les_films:
+            le_film = {
+                "id": str(series[0]),
+                "nom": str(series[1].decode()),
+                "description": str(series[2].decode())
+            }
+            films_json['films'].append(le_film)
 
-for x in myresult:
-    print(str((x[1]).decode()))
-    print(x)
+        return films_json
 
-json_film = {film:[]}
+
+if __name__ == '__main__':
+    app.run(debug=True)
