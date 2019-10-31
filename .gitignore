@@ -1,20 +1,4 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
  
-@KioHugo 
-0
-00hippothomas/Pokemon-Python
- Code Issues 0 Pull requests 0 Projects 0 Wiki Security Insights
-Pokemon-Python/.gitignore
-@KioHugo KioHugo initial commit
-9531f47 yesterday
-131 lines (107 sloc)  1.72 KB
-  
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
