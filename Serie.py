@@ -8,7 +8,7 @@ api = Api(app)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="root",
+    passwd="pwd",
     database="projet-cine"
 )
 mycursor = mydb.cursor()
