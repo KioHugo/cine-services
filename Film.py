@@ -14,38 +14,32 @@ mydb = mysql.connector.connect(
 myCursor = mydb.cursor()
 
 
-@api.route('/films')
-class Films(Resource):
+def result_as_film_json(result):
+    le_film = {
+        "id": str(result[0]),
+        "nom": str(result[1].decode()),
+        "description": str(result[2].decode()),
+        "url": str(result[3].decode())
+    }
+    return le_film
+
+
+def getAllFilms():
     SELECT_ALL_FILMS = "SELECT * FROM film"
-
-    def get(self):
-        myCursor.execute(self.SELECT_ALL_FILMS)
-        les_films = myCursor.fetchall()
-        films_json = {"films": []}
-        for film in les_films:
-            le_film = {
-                "id": str(film[0]),
-                "nom": str(film[1].decode()),
-                "description": str(film[2].decode())
-            }
-            films_json['films'].append(le_film)
-
-        return films_json
+    myCursor.execute(SELECT_ALL_FILMS)
+    les_films = myCursor.fetchall()
+    films_json = {"films": []}
+    for row in les_films:
+        le_film = result_as_film_json(row)
+        films_json['films'].append(le_film)
+    return films_json
 
 
-@api.route('/film/<id>')
-class Film(Resource):
-    SELECT_ONE_FILM = "SELECT * FROM film WHERE ID = ?"
-
-    def get(self, id):
-        self.SELECT_ONE_FILM = self.SELECT_ONE_FILM.replace('?', format(id))
-        myCursor.execute(self.SELECT_ONE_FILM)
-        result = myCursor.fetchall()
-        films_json = {}
-        if len(result) != 0:
-            films_json = {
-                "id": str(result[0][0]),
-                "nom": str(result[0][1].decode()),
-                "description": str(result[0][2].decode())
-            }
-        return films_json
+def getFilmById(id):
+    SELECT_ONE_FILM = "SELECT * FROM film WHERE ID = ?".replace('?', format(id))
+    myCursor.execute(SELECT_ONE_FILM)
+    result = myCursor.fetchall()
+    films_json = {}
+    if len(result) != 0:
+        films_json = result_as_film_json(result[0])
+    return films_json

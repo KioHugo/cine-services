@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restplus import Resource, Api
-from Series import *
-import Film as film_func
+from Serie import *
+from Film import *
 
 app = Flask(__name__)
 api = Api(app)
@@ -14,21 +14,21 @@ class Series(Resource):
 
 
 @api.route('/serie/<id>')
-class Serie(Resource):
+class Series(Resource):
     def get(self, id):
         return getSerieById(id)
 
 
 @api.route('/films')
-class Films(Resource):
+class Film(Resource):
     def get(self):
-        return film_func.Films(Resource).get()
+        return getAllFilms()
 
 
 @api.route('/film/<id>')
 class Film(Resource):
     def get(self, id):
-        return film_func.Film(Resource).get(id)
+        return getFilmById(id)
 
 
 if __name__ == '__main__':
