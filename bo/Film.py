@@ -1,3 +1,4 @@
+from bo.Acteur import getActeurBy
 from dbc.mysqlDBC import getConnection
 
 mydb = getConnection()
@@ -9,8 +10,16 @@ def result_as_film_json(result):
         "id": str(result[0]),
         "nom": str(result[1].decode()),
         "description": str(result[2].decode()),
-        "url": str(result[3].decode())
+        "url": str(result[3].decode()),
+        "id_categorie": str(result[4]),
+        "acteur_list": None
     }
+    try:
+        les_auteurs = getActeurBy(str(le_film['id']), 'film')
+        le_film['acteur_list'] = les_auteurs
+    except:
+        pass
+        # print("Impossible de charger la liste des acteurs pour la série " + str(la_serie['id']))
     return le_film
 
 
