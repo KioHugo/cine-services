@@ -27,8 +27,11 @@ def getAllSeries():
 
 def getSerieById(id):
     request = SELECT_ONE_SERIE.replace('?', format(id))
-    myCursor.execute(request)
-    result = myCursor.fetchall()
+    try:
+        myCursor.execute(request)
+        result = myCursor.fetchall()
+    except:
+        return False
     series_json = {}
     if len(result) != 0:
         series_json = result_as_serie_json(result[0])
