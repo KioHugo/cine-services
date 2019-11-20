@@ -2,7 +2,8 @@ from dbc.mysqlDBC import getConnection
 
 mydb = getConnection()
 myCursor = mydb.cursor()
-
+SELECT_ALL_SERIES = "SELECT * FROM serie"
+SELECT_ONE_SERIE = "SELECT * FROM serie WHERE ID = ?"
 
 def result_as_serie_json(result):
     la_serie = {
@@ -15,7 +16,6 @@ def result_as_serie_json(result):
 
 
 def getAllSeries():
-    SELECT_ALL_SERIES = "SELECT * FROM serie"
     myCursor.execute(SELECT_ALL_SERIES)
     les_series = myCursor.fetchall()
     series_json = {"series": []}
@@ -26,8 +26,8 @@ def getAllSeries():
 
 
 def getSerieById(id):
-    SELECT_ONE_SERIE = "SELECT * FROM serie WHERE ID = ?".replace('?', format(id))
-    myCursor.execute(SELECT_ONE_SERIE)
+    request = SELECT_ONE_SERIE.replace('?', format(id))
+    myCursor.execute(request)
     result = myCursor.fetchall()
     series_json = {}
     if len(result) != 0:
