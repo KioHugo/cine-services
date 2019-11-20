@@ -26,8 +26,11 @@ def result_as_serie_json(result):
 
 
 def getAllSeries():
-    myCursor.execute(SELECT_ALL_SERIES)
-    les_series = myCursor.fetchall()
+    try:
+        myCursor.execute(SELECT_ALL_SERIES)
+        les_series = myCursor.fetchall()
+    except:
+        return False
     series_json = {"series": []}
     for row in les_series:
         la_serie = result_as_serie_json(row)
@@ -37,8 +40,11 @@ def getAllSeries():
 
 def getSerieById(id):
     request = SELECT_ONE_SERIE.replace('?', format(id))
-    myCursor.execute(request)
-    result = myCursor.fetchall()
+    try:
+        myCursor.execute(request)
+        result = myCursor.fetchall()
+    except:
+        return False
     series_json = {}
     if len(result) != 0:
         series_json = result_as_serie_json(result[0])

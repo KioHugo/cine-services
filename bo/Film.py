@@ -3,6 +3,8 @@ from dbc.mysqlDBC import getConnection
 
 mydb = getConnection()
 myCursor = mydb.cursor()
+SELECT_ALL_FILMS = "SELECT * FROM film"
+SELECT_ONE_FILM = "SELECT * FROM film WHERE ID = ?"
 
 
 def result_as_film_json(result):
@@ -24,9 +26,11 @@ def result_as_film_json(result):
 
 
 def getAllFilms():
-    SELECT_ALL_FILMS = "SELECT * FROM film"
-    myCursor.execute(SELECT_ALL_FILMS)
-    les_films = myCursor.fetchall()
+    try:
+        myCursor.execute(SELECT_ALL_FILMS)
+        les_films = myCursor.fetchall()
+    except:
+        return False
     films_json = {"films": []}
     for row in les_films:
         le_film = result_as_film_json(row)
@@ -35,9 +39,12 @@ def getAllFilms():
 
 
 def getFilmById(id):
-    SELECT_ONE_FILM = "SELECT * FROM film WHERE ID = ?".replace('?', format(id))
-    myCursor.execute(SELECT_ONE_FILM)
-    result = myCursor.fetchall()
+    request = SELECT_ONE_FILM.replace('?', format(id))
+    try:
+        myCursor.execute(request)
+        result = myCursor.fetchall()
+    except:
+        return False
     films_json = {}
     if len(result) != 0:
         films_json = result_as_film_json(result[0])

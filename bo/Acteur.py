@@ -35,8 +35,11 @@ def getActeurBy(id, type):
         request = SELECT_ACTEUR_BY_FILM.replace('?', format(id))
     else:
         return []
-    myCursor.execute(request)
-    les_acteurs = myCursor.fetchall()
+    try:
+        myCursor.execute(request)
+        les_acteurs = myCursor.fetchall()
+    except:
+        return False
     acteurs_json = []
     for row in les_acteurs:
         le_acteur = {
@@ -49,8 +52,11 @@ def getActeurBy(id, type):
 
 def getActeurById(id):
     request = SELECT_ACTEUR_BY_ID.replace('?', format(id))
-    myCursor.execute(request)
-    result = myCursor.fetchall()
+    try:
+        myCursor.execute(request)
+        result = myCursor.fetchall()
+    except:
+        return False
     acteur_json = {}
     if len(result) != 0:
         acteur_json = result_as_acteur_json(result[0])

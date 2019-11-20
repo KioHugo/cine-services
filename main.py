@@ -15,38 +15,63 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 @api.route('/series')
 class Series(Resource):
     def get(self):
-        return getAllSeries()
+        data = getAllSeries()
+        if data == False:
+            api.abort(404)
+        else:
+            return data
 
 
 @api.route('/serie/<id>')
 class SerieById(Resource):
     def get(self, id):
-        return getSerieById(id)
+        data = getSerieById(id)
+        if data == False:
+            api.abort(404)
+        else:
+            return data
 
 
 @api.route('/films')
 class Film(Resource):
     def get(self):
-        return getAllFilms()
+        data = getAllFilms()
+        if data == False:
+            api.abort(404)
+        else:
+            return data
 
 
 @api.route('/film/<id>')
 class FilmById(Resource):
     def get(self, id):
-        return getFilmById(id)
+        data = getFilmById(id)
+        if data == False:
+            api.abort(404)
+        else:
+            return data
 
 
-@api.route('/acteur')
+@api.route('/acteurs')
 class Acteur(Resource):
     def get(self):
-        return getAllActeur()
+        data = getAllActeur()
+        if data == False:
+            api.abort(404)
+        else:
+            return data
 
 
 @api.route('/acteur/<id>')
 class ActeurById(Resource):
     def get(self, id):
-        return getActeurById(id)
+        data = getActeurById(id)
+        if data == False:
+            api.abort(404)
+        else:
+            return data
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='192.168.43.140')
+    # app.run(debug=True, host='192.168.43.140')
+    app.run(debug=True)
