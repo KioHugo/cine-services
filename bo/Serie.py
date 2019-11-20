@@ -16,8 +16,11 @@ def result_as_serie_json(result):
 
 
 def getAllSeries():
-    myCursor.execute(SELECT_ALL_SERIES)
-    les_series = myCursor.fetchall()
+    try:
+        myCursor.execute(SELECT_ALL_SERIES)
+        les_series = myCursor.fetchall()
+    except:
+        return False
     series_json = {"series": []}
     for row in les_series:
         la_serie = result_as_serie_json(row)

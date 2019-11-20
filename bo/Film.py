@@ -17,8 +17,11 @@ def result_as_film_json(result):
 
 
 def getAllFilms():
-    myCursor.execute(SELECT_ALL_FILMS)
-    les_films = myCursor.fetchall()
+    try:
+        myCursor.execute(SELECT_ALL_FILMS)
+        les_films = myCursor.fetchall()
+    except:
+        return False
     films_json = {"films": []}
     for row in les_films:
         le_film = result_as_film_json(row)

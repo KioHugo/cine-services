@@ -15,7 +15,11 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 @api.route('/series')
 class Series(Resource):
     def get(self):
-        return getAllSeries()
+        data = getAllSeries()
+        if data == False:
+            api.abort(404)
+        else:
+            return data
 
 
 @api.route('/serie/<id>')
@@ -31,7 +35,11 @@ class SerieById(Resource):
 @api.route('/films')
 class Film(Resource):
     def get(self):
-        return getAllFilms()
+        data = getAllFilms()
+        if data == False:
+            api.abort(404)
+        else:
+            return data
 
 
 @api.route('/film/<id>')
@@ -47,7 +55,11 @@ class FilmById(Resource):
 @api.route('/acteurs')
 class Acteur(Resource):
     def get(self):
-        return getAllActeur()
+        data = getAllActeur()
+        if data == False:
+            api.abort(404)
+        else:
+            return data
 
 
 @api.route('/acteur/<id>')
