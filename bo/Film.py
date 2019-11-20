@@ -1,16 +1,6 @@
-from flask import Flask
-from flask_restplus import Resource, Api
-import mysql.connector
+from dbc.mysqlDBC import getConnection
 
-app = Flask(__name__)
-api = Api(app)
-
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="pwd",
-    database="projet-cine"
-)
+mydb = getConnection()
 myCursor = mydb.cursor()
 
 

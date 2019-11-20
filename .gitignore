@@ -106,6 +106,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+*.ini
 
 # Intellij IDEA
 .idea

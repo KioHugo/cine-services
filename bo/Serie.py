@@ -1,11 +1,6 @@
-import mysql.connector
+from dbc.mysqlDBC import getConnection
 
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="pwd",
-    database="projet-cine"
-)
+mydb = getConnection()
 myCursor = mydb.cursor()
 
 
