@@ -12,7 +12,7 @@ def result_as_serie_json(result):
         "id": str(result[0]),
         "nom": str(result[1].decode()),
         "description": str(result[2].decode()),
-        "img_url": str(result[3].decode()),
+        "url": str(result[3].decode()),
         "id_categorie": str(result[4]),
         "acteur_list": None
     }

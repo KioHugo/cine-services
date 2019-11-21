@@ -10,5 +10,5 @@
 /film/id
 /series
 /serie/id
-/acteur
+/acteurs
 /acteur/id
