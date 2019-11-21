@@ -2,6 +2,8 @@
 ###### Package python
 - pip install flask-restplus
 - pip install -U flask-cors
+- pip install mysql
+- pip install mysql-connector
 
 #### Routes
 /films
