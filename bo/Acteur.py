@@ -34,7 +34,7 @@ def getActeurBy(id, type):
     elif type == "film":
         request = SELECT_ACTEUR_BY_FILM.replace('?', format(id))
     else:
-        return []
+        return {}
     try:
         myCursor.execute(request)
         les_acteurs = myCursor.fetchall()
