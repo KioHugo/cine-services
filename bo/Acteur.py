@@ -19,8 +19,11 @@ def result_as_acteur_json(result):
 
 
 def getAllActeur():
-    myCursor.execute(SELECT_ALL_ACTEUR)
-    les_acteurs = myCursor.fetchall()
+    try:
+        myCursor.execute(SELECT_ALL_ACTEUR)
+        les_acteurs = myCursor.fetchall()
+    except:
+        return False
     acteurs_json = {"acteurs": []}
     for row in les_acteurs:
         le_acteur = result_as_acteur_json(row)
