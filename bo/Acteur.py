@@ -1,4 +1,5 @@
 from dbc.mysqlDBC import getConnection
+from flask_restplus import fields
 
 mydb = getConnection()
 myCursor = mydb.cursor()
@@ -66,3 +67,21 @@ def getActeurById(id):
     if len(result) != 0:
         acteur_json = result_as_acteur_json(result[0])
     return acteur_json
+
+
+def get_model_acteur(namespace):
+    acteur_model = namespace.model('Acteur', {
+        'id': fields.Integer(description='id de l\'acteur'),
+        'nom': fields.String(description='Nom de l \'acteur'),
+        'prenom': fields.String(description='Prénom de l \'acteur'),
+        'url': fields.String(description='Url vers l\'image de l\'acteur'),
+        'description': fields.String(description='Description de l\'acteur'),
+    })
+    acteur_list_model = namespace.model('Acteurs', {
+        'acteurs': fields.List(fields.Nested(acteur_model))
+    })
+    acteur_list_id_model = namespace.model('Acteur id list', {
+        'url': fields.String(description='Url de requête pour l\'acteur'),
+        'id': fields.Integer(description='Id de l\'acteur')
+    })
+    return [acteur_model, acteur_list_model, acteur_list_id_model]

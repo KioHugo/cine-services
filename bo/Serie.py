@@ -1,5 +1,7 @@
 from bo.Acteur import getActeurBy
 from dbc.mysqlDBC import getConnection
+from flask_restplus import fields
+
 
 mydb = getConnection()
 myCursor = mydb.cursor()
@@ -49,3 +51,18 @@ def getSerieById(id):
     if len(result) != 0:
         series_json = result_as_serie_json(result[0])
     return series_json
+
+
+def get_model_serie(namespace, acteur_list):
+    serie_model = namespace.model('Serie', {
+        'id': fields.Integer(description='Id de la série'),
+        'nom': fields.String(description='Nom de la série'),
+        'description': fields.String(description='Description de la série'),
+        'url': fields.String(description='Url vers l\'affiche de la série'),
+        'id_categorie': fields.String(description='Id de la catégorie de la série'),
+        'acteurs_list': fields.List(fields.Nested(acteur_list))
+    });
+    serie_list_model = namespace.model('Series', {
+        'series': fields.List(fields.Nested(serie_model))
+    });
+    return [serie_model, serie_list_model]
