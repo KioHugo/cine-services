@@ -11,15 +11,15 @@
 - `/film/<id>` : [GET] Affiche un film en fonction de son id
 ```JSON
   {
-    'id': ''
-    'nom': ''
-    'description': ''
-    'url': ''
-    'id_categorie': ''
-    'acteurs_list': [
+    "id": "",
+    "nom": "",
+    "description": "",
+    "url": "",
+    "id_categorie": "",
+    "acteurs_list": [
       {
-        'url': '',
-        'id': ''
+        "url": "",
+        "id": ""
       }
      ]
   }
@@ -29,15 +29,15 @@
 - `/serie/<id>` : [GET] Affiche une série en fonction de son id
 ```JSON
   {
-    'id': ''
-    'nom': ''
-    'description': ''
-    'url': ''
-    'id_categorie': ''
-    'acteurs_list': [
+    "id": "",
+    "nom": "",
+    "description": "",
+    "url": "",
+    "id_categorie": "",
+    "acteurs_list": [
       {
-        'url': '',
-        'id': ''
+        "url": "",
+        "id": ""
       }
      ]
   }
@@ -47,9 +47,9 @@
 - `/acteur/<id>` : [GET] Affiche un acteur en fonction de son id
 ```JSON
   {
-    'id': ,
-    'nom': ,
-    'prenom': ,
-    'description': 
+    "id": "",
+    "nom": "",
+    "prenom": "",
+    "description": "" 
   }
 ```
