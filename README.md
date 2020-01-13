@@ -6,9 +6,9 @@
 - pip install mysql-connector
 
 #### Routes
-/films
-/film/id
-/series
-/serie/id
-/acteurs
-/acteur/id
+/films\
+/film/id\
+/series\
+/serie/id\
+/acteurs\
+/acteur/id\
