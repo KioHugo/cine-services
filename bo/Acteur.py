@@ -13,7 +13,9 @@ def result_as_acteur_json(result):
     acteur = {
         "id": str(result[0]),
         "nom": str(result[1].decode()),
-        "prenom": str(result[2].decode())
+        "prenom": str(result[2].decode()),
+        "url": str(result[3].decode()),
+        "description": str(result[4].decode())
     }
     return acteur
 
