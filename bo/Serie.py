@@ -12,9 +12,9 @@ SELECT_ONE_SERIE = "SELECT * FROM serie WHERE ID = ?"
 def result_as_serie_json(result):
     la_serie = {
         "id": str(result[0]),
-        "nom": str(result[1].decode()),
-        "description": str(result[2].decode()),
-        "url": str(result[3].decode()),
+        "nom": str(result[1]),
+        "description": str(result[2]),
+        "url": str(result[3]),
         "id_categorie": str(result[4]),
         "acteur_list": None
     }
@@ -60,7 +60,7 @@ def get_model_serie(namespace, acteur_list):
         'description': fields.String(description='Description de la série'),
         'url': fields.String(description='Url vers l\'affiche de la série'),
         'id_categorie': fields.String(description='Id de la catégorie de la série'),
-        'acteurs_list': fields.List(fields.Nested(acteur_list))
+        'acteur_list': fields.List(fields.Nested(acteur_list))
     });
     serie_list_model = namespace.model('Series', {
         'series': fields.List(fields.Nested(serie_model))

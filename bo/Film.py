@@ -12,9 +12,9 @@ SELECT_ONE_FILM = "SELECT * FROM film WHERE ID = ?"
 def result_as_film_json(result):
     le_film = {
         "id": str(result[0]),
-        "nom": str(result[1].decode()),
-        "description": str(result[2].decode()),
-        "url": str(result[3].decode()),
+        "nom": str(result[1]),
+        "description": str(result[2]),
+        "url": str(result[3]),
         "id_categorie": str(result[4]),
         "acteur_list": None
     }
@@ -60,7 +60,7 @@ def get_model_film(namespace, acteur_list):
         'description': fields.String(description='Description du film'),
         'url': fields.String(description='Url vers l\'affiche du film'),
         'id_categorie': fields.String(description='Id de la catégorie du film'),
-        'acteurs_list': fields.List(fields.Nested(acteur_list))
+        'acteur_list': fields.List(fields.Nested(acteur_list))
     })
     film_list_model = namespace.model('Films', {
         'films': fields.List(fields.Nested(film_model))

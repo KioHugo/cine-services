@@ -9,7 +9,7 @@ from bo.Film import *
 app = Flask(__name__)
 api = Api(app,
           version="1.0.0",
-          title="Cinse-service",
+          title="Cine-service",
           description="API pour intéragir avec des films des séries et des acteurs"
          )
 
