@@ -13,10 +13,10 @@ SELECT_ACTEUR_BY_FILM = "SELECT * FROM film_acteur WHERE id_film = '?'"
 def result_as_acteur_json(result):
     acteur = {
         "id": str(result[0]),
-        "nom": str(result[1]),
-        "prenom": str(result[2]),
-        "url": str(result[3]),
-        "description": str(result[4])
+        "nom": str(result[1].decode()),
+        "prenom": str(result[2].decode()),
+        "url": str(result[3].decode()),
+        "description": str(result[4].decoed())
     }
     return acteur
 
