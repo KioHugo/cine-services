@@ -1,5 +1,7 @@
 from bo.Acteur import getActeurBy
 from dbc.mysqlDBC import getConnection
+from flask_restplus import fields
+
 
 mydb = getConnection()
 myCursor = mydb.cursor()
@@ -49,3 +51,18 @@ def getFilmById(id):
     if len(result) != 0:
         films_json = result_as_film_json(result[0])
     return films_json
+
+
+def get_model_film(namespace, acteur_list):
+    film_model = namespace.model('Film', {
+        'id': fields.Integer(description='Id du film'),
+        'nom': fields.String(description='Nom du film'),
+        'description': fields.String(description='Description du film'),
+        'url': fields.String(description='Url vers l\'affiche du film'),
+        'id_categorie': fields.String(description='Id de la catégorie du film'),
+        'acteur_list': fields.List(fields.Nested(acteur_list))
+    })
+    film_list_model = namespace.model('Films', {
+        'films': fields.List(fields.Nested(film_model))
+    })
+    return [film_model, film_list_model]
