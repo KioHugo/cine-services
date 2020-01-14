@@ -12,9 +12,9 @@ SELECT_ONE_FILM = "SELECT * FROM film WHERE ID = ?"
 def result_as_film_json(result):
     le_film = {
         "id": str(result[0]),
-        "nom": str(result[1]),
-        "description": str(result[2]),
-        "url": str(result[3]),
+        "nom": str(result[1].decode()),
+        "description": str(result[2].decode()),
+        "url": str(result[3].decode()),
         "id_categorie": str(result[4]),
         "acteur_list": None
     }
