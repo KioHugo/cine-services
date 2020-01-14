@@ -16,7 +16,7 @@ def result_as_acteur_json(result):
         "nom": str(result[1].decode()),
         "prenom": str(result[2].decode()),
         "url": str(result[3].decode()),
-        "description": str(result[4].decoed())
+        "description": str(result[4].decode())
     }
     return acteur
 
