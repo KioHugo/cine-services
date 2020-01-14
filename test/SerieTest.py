@@ -13,7 +13,7 @@ class SerieTest(unittest.TestCase):
         self.testGetSerieByWrongId()
 
     def testGetAllSerie(self):
-        series = requests.get('http://127.0.0.1:5000/series').json()
+        series = requests.get('http://127.0.0.1:472/series').json()
         # for x in series["series"]:
         #     print(x["nom"])
 
@@ -37,26 +37,26 @@ class SerieTest(unittest.TestCase):
         }
       ]
     }
-        serie = requests.get('http://127.0.0.1:5000/serie/10').json()
+        serie = requests.get('http://127.0.0.1:472/serie/10').json()
 
         self.assertEqual(serie, serieAttendu)
 
     def testGetSerieByNullId(self):
         try:
-            serie = requests.get('http://127.0.0.1:5000/serie/')
+            serie = requests.get('http://127.0.0.1:472/serie/')
         except requests.exceptions.HTTPError as err:
             print("404 Page not found ", err)
 
         self.assertEqual(serie.status_code, 404)
 
     def testGetSerieByNoExistingId(self):
-        serie = requests.get('http://127.0.0.1:5000/serie/999').json()
+        serie = requests.get('http://127.0.0.1:472/serie/999').json()
 
         self.assertEqual(serie, {})
 
     def testGetSerieByWrongId(self):
         try:
-            serie = requests.get('http://127.0.0.1:5000/serie/wrongId')
+            serie = requests.get('http://127.0.0.1:472/serie/wrongId')
         except requests.exceptions.HTTPError as err:
             print("404 Page not found ", err)
 

@@ -13,7 +13,7 @@ class FilmTest(unittest.TestCase):
         self.testGetFilmByWrongId()
 
     def testGetAllFilm(self):
-        films = requests.get('http://127.0.0.1:5000/films').json()
+        films = requests.get('http://127.0.0.1:472/films').json()
         # for x in films["films"]:
         #     print(x["nom"])
 
@@ -41,26 +41,26 @@ class FilmTest(unittest.TestCase):
         }
       ]
     }
-        film = requests.get('http://127.0.0.1:5000/film/3').json()
+        film = requests.get('http://127.0.0.1:472/film/3').json()
 
         self.assertEqual(film, filmAttendu)
 
     def testGetFilmByNullId(self):
         try:
-            film = requests.get('http://127.0.0.1:5000/film/')
+            film = requests.get('http://127.0.0.1:472/film/')
         except requests.exceptions.HTTPError as err:
             print("404 Page not found ", err)
 
         self.assertEqual(film.status_code, 404)
 
     def testGetFilmByNoExistingId(self):
-        film = requests.get('http://127.0.0.1:5000/film/999').json()
+        film = requests.get('http://127.0.0.1:472/film/999').json()
 
         self.assertEqual(film, {})
 
     def testGetFilmByWrongId(self):
         try:
-            film = requests.get('http://127.0.0.1:5000/film/wrongId')
+            film = requests.get('http://127.0.0.1:472/film/wrongId')
         except requests.exceptions.HTTPError as err:
             print("404 Page not found ", err)
 
