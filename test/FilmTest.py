@@ -21,26 +21,26 @@ class FilmTest(unittest.TestCase):
 
     def testGetFilmById(self):
         filmAttendu = {
-          "id": "3",
+          "id": 3,
           "nom": "Casino Royale",
           "description": "Après avoir commis un incident diplomatique, James Bond est envoyé en vacances. Il se trouve alors sur la piste du Chiffre, le banquier du terrorisme international.",
           "url": "https://media.senscritique.com/media/000012408254/160/Casino_Royale.jpg",
           "id_categorie": "1",
           "acteur_list": [
-        {
-          "id": "20",
-          "url": "http://192.162.43.140/acteur/20"
-        },
-        {
-          "id": "21",
-          "url": "http://192.162.43.140/acteur/21"
-        },
-        {
-          "id": "41",
-          "url": "http://192.162.43.140/acteur/41"
+            {
+              "url": "http://192.162.43.140/acteur/20",
+              "id": 20
+            },
+            {
+              "url": "http://192.162.43.140/acteur/21",
+              "id": 21
+            },
+            {
+              "url": "http://192.162.43.140/acteur/41",
+              "id": 41
+            }
+          ]
         }
-      ]
-    }
         film = requests.get('http://127.0.0.1:472/film/3').json()
 
         self.assertEqual(film, filmAttendu)
@@ -56,7 +56,16 @@ class FilmTest(unittest.TestCase):
     def testGetFilmByNoExistingId(self):
         film = requests.get('http://127.0.0.1:472/film/999').json()
 
-        self.assertEqual(film, {})
+        filmAttendu = {
+          "id": None,
+          "nom": None,
+          "description": None,
+          "url": None,
+          "id_categorie": None,
+          "acteur_list": None
+        }
+
+        self.assertEqual(film, filmAttendu)
 
     def testGetFilmByWrongId(self):
         try:

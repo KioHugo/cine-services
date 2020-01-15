@@ -21,22 +21,22 @@ class SerieTest(unittest.TestCase):
 
     def testGetSerieById(self):
         serieAttendu = {
-          "id": "10",
+          "id": 10,
           "nom": "Peaky Blinders",
           "description": "En 1919, à Birmingham, soldats, révolutionnaires politiques et criminels combattent pour se faire une place dans le paysage industriel de l'après-Guerre. Le Parlement s'attend à une violente révolte, et Winston Churchill mobilise des forces spéciales pour contenir les menaces. La famille Shelby compte parmi les membres les plus redoutables. Surnommés les \"Peaky Blinders\" par rapport à leur utilisation de lames de rasoir cachées dans leurs casquettes, ils tirent principalement leur argent de paris et de vol. Tommy Shelby, le plus dangereux de tous, va devoir faire face à l'arrivée de Campbell, un impitoyable chef de la police qui a pour mission de nettoyer la ville.",
           "url": "https://media.senscritique.com/media/000005979274/160/Peaky_Blinders.jpg",
           "id_categorie": "1",
           "acteur_list": [
-        {
-          "id": "50",
-          "url": "http://192.162.43.140/acteur/50"
-        },
-        {
-          "id": "51",
-          "url": "http://192.162.43.140/acteur/51"
+            {
+              "url": "http://192.162.43.140/acteur/50",
+              "id": 50
+            },
+            {
+              "url": "http://192.162.43.140/acteur/51",
+              "id": 51
+            }
+          ]
         }
-      ]
-    }
         serie = requests.get('http://127.0.0.1:472/serie/10').json()
 
         self.assertEqual(serie, serieAttendu)
@@ -52,7 +52,16 @@ class SerieTest(unittest.TestCase):
     def testGetSerieByNoExistingId(self):
         serie = requests.get('http://127.0.0.1:472/serie/999').json()
 
-        self.assertEqual(serie, {})
+        serieAttendu = {
+          "id": None,
+          "nom": None,
+          "description": None,
+          "url": None,
+          "id_categorie": None,
+          "acteur_list": None
+        }
+
+        self.assertEqual(serie, serieAttendu)
 
     def testGetSerieByWrongId(self):
         try:
